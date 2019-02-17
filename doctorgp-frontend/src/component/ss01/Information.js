@@ -9,8 +9,8 @@ class Information extends Component {
     }
     render() {
         const style = {
-            height : '10px',
-            color : 'red'
+            height: '10px',
+            color: 'red'
         }
         return (
             <div className="person">
@@ -18,7 +18,7 @@ class Information extends Component {
                 <h2>Age: {this.props.age}</h2>
                 <p>{this.props.children}</p>
                 <h2>{this.props.text}</h2>
-                <input style={style} onKeyPress={this.changeName} type="text"  />
+                <input style={style} onKeyPress={this.changeName} type="text" />
             </div>
         )
     }

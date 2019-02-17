@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Information from '../src/component/ss01/Information';
-
+import Lists from './component/ss02/Lists';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,14 @@ class App extends Component {
         { name: "ReactJS", age: 5 }
       ],
       number: 0,
-      text: '',
+      text: 'Enter inpput set value',
+      show: true,
+      _name: 'hide',
+      products: [
+        { name: 'iphone x', storage: '32GB', price: '15.000.000 VND' },
+        { name: 'SamSung Galaxy Note 9', storage: '64GB', price: '20.000.000 VND' },
+        { name: 'Google pixel 3', storage: '128GB', price: '25.000.000 VND' },
+      ]
     }
   }
   clickHandler(value) {
@@ -20,16 +27,36 @@ class App extends Component {
   }
   onChangeName = (value) => {
     this.setState({
-      text : value,
+      text: value,
+    })
+  }
+  showPerson = () => {
+    this.setState({
+      show: !this.state.show,
+      _name: (this.state.show) ? 'show' : 'hide'
+    })
+  }
+  del = (index) => {
+    let arr = this.state.products;
+    arr.splice(index, 1);
+    this.setState({
+      products: arr
     })
   }
   render() {
+    // console.log(this.state._name);
+    // var nameBtn = this.state.show ? 'hide' : 'show'
     return (
       <div className="App">
-        <Information name="Vũ Việt Anh" age="22" text={this.state.text} changeName={this.onChangeName} />
-        <Information name="Vũ Hải Đăng" age="10" text={this.state.text} changeName={this.onChangeName} />
-        <Information name={this.state.preson[0].name} age={this.state.preson[0].age} text={this.state.text} changeName={this.onChangeName} />
-        <Information name={this.state.preson[1].name} age={this.state.preson[1].age} text={this.state.text} changeName={this.onChangeName}>Reacjs props children</Information>
+        {this.state.show === true ?
+          <div>
+            <Information name="Vũ Việt Anh" age="22" text={this.state.text} changeName={this.onChangeName} />
+            <Information name="Vũ Hải Đăng" age="10" text={this.state.text} changeName={this.onChangeName} />
+            <Information name={this.state.preson[0].name} age={this.state.preson[0].age} text={this.state.text} changeName={this.onChangeName} />
+            <Information name={this.state.preson[1].name} age={this.state.preson[1].age} text={this.state.text} changeName={this.onChangeName}>Reacjs props children</Information>
+          </div>
+          : null}
+        <button onClick={this.showPerson}>  {this.state._name} </button>
         <div>
           <div className="table">
             Number:  {this.state.number}
@@ -37,6 +64,7 @@ class App extends Component {
           <button onClick={() => this.clickHandler(1)}>Add number</button>
           <button onClick={() => this.clickHandler(-1)}>Remove number</button>
         </div>
+        <Lists list={this.state.products} delete={this.del} />
       </div>
     );
   }
