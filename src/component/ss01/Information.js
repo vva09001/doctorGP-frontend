@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Information.css';
+import { connect } from 'react-redux';
+// import { listPerson } from '../Redux/actions/inedx';
 
 class Information extends Component {
     changeName = (event) => {
@@ -8,20 +10,27 @@ class Information extends Component {
         }
     }
     render() {
-        const style = {
-            height: '10px',
-            color: 'red'
-        }
+        var data = this.props.listPerson;
+        var all = data.map((data, index) => {
+            return (
+                <div className="person" key={index}>
+                    <h1>{data.name}</h1>
+                    <h2>Age: {data.age}</h2>
+                    {/* <p>{this.props.children}</p>
+                    <h2>{this.props.text}</h2> */}
+                    <input onKeyPress={this.changeName} type="text" />
+                </div>
+            )
+        });
         return (
-            <div className="person">
-                <h1>{this.props.name}</h1>
-                <h2>Age: {this.props.age}</h2>
-                <p>{this.props.children}</p>
-                <h2>{this.props.text}</h2>
-                <input style={style} onKeyPress={this.changeName} type="text" />
-            </div>
+            all
         )
     }
 }
 
-export default Information;
+const getData = (state) => {
+    return {
+        listPerson: state.listPerson
+    }
+};
+export default connect(getData, null)(Information);

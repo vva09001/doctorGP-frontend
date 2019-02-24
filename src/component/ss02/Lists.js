@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Lists.css';
 import LogoDelete from '../../img/delete.png';
+import { connect } from 'react-redux';
+import * as action from '../Redux/actions/inedx'
 
 class Col extends Component {
     render() {
@@ -16,9 +18,9 @@ class Col extends Component {
 }
 class Lists extends Component {
     render() {
-        var allProducts = this.props.list.map((data, index) => {
+        var allProducts = this.props.listProduct.map((data, index) => {
             return (
-                <Col key={index} name={data.name} storage={data.storage} amount={data.price} delete={() => this.props.delete(index)} />
+                <Col key={index} name={data.name} storage={data.storage} amount={data.price} delete={() => this.props.onRemove(index)} />
             )
         })
         return (
@@ -39,4 +41,16 @@ class Lists extends Component {
         )
     }
 }
-export default Lists;
+const getData = (state) => {
+    return {
+        listProduct: state.listProducts
+    }
+} 
+const remove = (dispatch) => {
+    return {
+        onRemove : (index) => {
+            dispatch(action.Remove(index))
+        }
+    }
+}
+export default connect(getData,remove, null)(Lists);
