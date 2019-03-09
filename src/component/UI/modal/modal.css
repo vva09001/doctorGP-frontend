@@ -1,0 +1,40 @@
+.Modal {
+    position: fixed;
+    background-color: #cccccc;
+    z-index: 999;
+    width: 70%;
+    border: 1px solid #cccccc;
+    box-shadow: 1px 1px 1px black;
+    height: auto;
+    top: 50%;
+    bottom: 50%;
+    box-sizing: border-box;
+    transition: all 003s ease-out;
+}
+.Backdrop {
+    z-index: 998;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(32, 32, 32, 0.541);
+}
+.Danger {
+    background-color: rgba(179, 38, 38, 0.699);
+    color: #cccccc;
+    border-radius: 5px;
+    padding: 5px;
+    float: right;
+}
+.Success {
+    background-color: rgba(88, 34, 235, 0.678);
+    color: #cccccc;
+    border-radius: 5px;
+    padding: 5px;
+    float: right;
+}
+@media (min-width: 600px) {
+    .Modal {
+        width: 500px;
+        left: calc(50% - 250px)
+    }
+}
